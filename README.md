@@ -47,6 +47,7 @@ Difftastic supports the following languages:
 * CSS
 * Dart
 * Elixir
+* Erlang
 * Emacs Lisp
 * Go
 * Haskell

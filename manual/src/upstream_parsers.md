@@ -13,6 +13,7 @@ Difftastic uses the following tree-sitter parsers:
 | CSS             | [tree-sitter/tree-sitter-css](https://github.com/tree-sitter/tree-sitter-css)                                                           |
 | Dart            | [UserNobody14/tree-sitter-dart](https://github.com/UserNobody14/tree-sitter-dart)                                                       |
 | Elixir          | [elixir-lang/tree-sitter-elixir](https://github.com/elixir-lang/tree-sitter-elixir)                                                     |
+| Erlang          | [AbstractMachinesLab/tree-sitter-erlang](https://github.com/AbstractMachinesLab/tree-sitter-erlang)                                     |
 | Emacs Lisp      | [wilfred/tree-sitter-elisp](https://github.com/Wilfred/tree-sitter-elisp)                                                               |
 | Go              | [tree-sitter/tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go)                                                             |
 | Haskell         | [tree-sitter/tree-sitter-haskell](https://github.com/tree-sitter/tree-sitter-haskell)                                                   |
