@@ -1,0 +1,29 @@
+================================================================================
+comprehensions
+================================================================================
+
+<< << (X*2) >> || <<X>> <= << 1,2,3 >>, is_integer(X) >>
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_bitstring_comprehension
+    (binary_string
+      (bin_part
+        (expr_op
+          (variable)
+          (integer))))
+    (expr_bitstring_generator
+      (variable)
+      (binary_string
+        (bin_part
+          (integer))
+        (bin_part
+          (integer))
+        (bin_part
+          (integer))))
+    (expr_bitstring_filter
+      (expr_function_call
+        (computed_function_name
+          (atom))
+        (variable)))))

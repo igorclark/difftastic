@@ -1,0 +1,38 @@
+================================================================================
+macro usage
+================================================================================
+
+?MY_MACRO
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_macro_application
+    (variable)))
+
+================================================================================
+macro application
+================================================================================
+
+?MY_MACRO(2)
+?MY_MACRO(2, [1])
+?MY_MACRO(2, [1], ?MY_MACRO_EXTRA)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_macro_application
+    (variable)
+    (integer))
+  (expr_macro_application
+    (variable)
+    (integer)
+    (expr_list
+      (integer)))
+  (expr_macro_application
+    (variable)
+    (integer)
+    (expr_list
+      (integer))
+    (expr_macro_application
+      (variable))))

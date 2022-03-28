@@ -1,0 +1,265 @@
+================================================================================
+catch an expression
+================================================================================
+
+catch 1+2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (expr_catch
+      (integer))
+    (integer)))
+
+================================================================================
+catch must be parenthesized
+================================================================================
+
+A = catch 1+2
+A = (catch 1+2)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_match
+    (variable)
+    (expr_op
+      (expr_catch
+        (integer))
+      (integer)))
+  (expr_match
+    (variable)
+    (expr_op
+      (expr_catch
+        (integer))
+      (integer))))
+
+================================================================================
+catch throw
+================================================================================
+
+catch (throw hello)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_catch
+    (expr_throw
+      (atom))))
+
+================================================================================
+try with single catch branch ignoring exception
+================================================================================
+
+try A
+catch
+  _  -> ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (expr_try_catch
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable)))
+        (atom)))))
+
+================================================================================
+try with multiple catch branches
+================================================================================
+
+try A
+catch
+  Class:ExceptionPattern -> ok;
+  _ -> ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (expr_try_catch
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable))
+          (pattern
+            (variable)))
+        (atom))
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable)))
+        (atom)))))
+
+================================================================================
+try with catch capturing stacktrace
+================================================================================
+
+try A
+catch
+  Class:ExceptionPattern:Stacktrace -> ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (expr_try_catch
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable))
+          (pattern
+            (variable))
+          (variable))
+        (atom)))))
+
+================================================================================
+try with catch capturing stacktrace with guard
+================================================================================
+
+try A
+catch
+  Class:ExceptionPattern:Stacktrace when is_good(Stacktrace) -> ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (expr_try_catch
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable))
+          (pattern
+            (variable))
+          (variable))
+        (guard_clause
+          (guard_seq
+            (guard
+              (expr_function_call
+                (computed_function_name
+                  (atom))
+                (variable)))))
+        (atom)))))
+
+================================================================================
+try with of patterns
+================================================================================
+
+try A of
+  A when is_good(A) -> ok
+catch
+  Class:ExceptionPattern:Stacktrace when is_good(Stacktrace) -> ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (case_clause
+      (pattern
+        (variable))
+      (guard_clause
+        (guard_seq
+          (guard
+            (expr_function_call
+              (computed_function_name
+                (atom))
+              (variable)))))
+      (atom))
+    (expr_try_catch
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable))
+          (pattern
+            (variable))
+          (variable))
+        (guard_clause
+          (guard_seq
+            (guard
+              (expr_function_call
+                (computed_function_name
+                  (atom))
+                (variable)))))
+        (atom)))))
+
+================================================================================
+try with after
+================================================================================
+
+try A after 1 end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (expr_try_after
+      (integer))))
+
+================================================================================
+try with of patterns, after value, and multiple catch branches
+================================================================================
+
+try A of
+  A when is_good(A) -> ok
+catch
+  Class:ExceptionPattern:Stacktrace when is_good(Stacktrace) -> ok;
+  _ -> error
+after
+  noop
+end
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_try
+    (variable)
+    (case_clause
+      (pattern
+        (variable))
+      (guard_clause
+        (guard_seq
+          (guard
+            (expr_function_call
+              (computed_function_name
+                (atom))
+              (variable)))))
+      (atom))
+    (expr_try_catch
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable))
+          (pattern
+            (variable))
+          (variable))
+        (guard_clause
+          (guard_seq
+            (guard
+              (expr_function_call
+                (computed_function_name
+                  (atom))
+                (variable)))))
+        (atom))
+      (catch_clause
+        (catch_pattern
+          (pattern
+            (variable)))
+        (atom)))
+    (expr_try_after
+      (atom))))

@@ -1,0 +1,184 @@
+================================================================================
+apply lambda without args
+================================================================================
+
+Lambda()
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (computed_function_name
+      (variable))))
+
+================================================================================
+apply lambda with args
+================================================================================
+
+Lambda(1)
+Lambda(1,2,3)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (computed_function_name
+      (variable))
+    (integer))
+  (expr_function_call
+    (computed_function_name
+      (variable))
+    (integer)
+    (integer)
+    (integer)))
+
+================================================================================
+nested lambda application
+================================================================================
+
+Op(1, Lambda(1,2,3))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (computed_function_name
+      (variable))
+    (integer)
+    (expr_function_call
+      (computed_function_name
+        (variable))
+      (integer)
+      (integer)
+      (integer))))
+
+================================================================================
+qualified function call without args
+================================================================================
+
+local:function()
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (qualified_function_name
+      (atom)
+      (atom))))
+
+================================================================================
+qualified function call with args
+================================================================================
+
+local:function(1)
+local:function(1,2,3)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (qualified_function_name
+      (atom)
+      (atom))
+    (integer))
+  (expr_function_call
+    (qualified_function_name
+      (atom)
+      (atom))
+    (integer)
+    (integer)
+    (integer)))
+
+================================================================================
+nested qualified function calls
+================================================================================
+
+local:op(1, local:function(1,2,3))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (qualified_function_name
+      (atom)
+      (atom))
+    (integer)
+    (expr_function_call
+      (qualified_function_name
+        (atom)
+        (atom))
+      (integer)
+      (integer)
+      (integer))))
+
+================================================================================
+local function call without args
+================================================================================
+
+local_function().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (atom)
+  (ERROR))
+
+================================================================================
+local function call with args
+================================================================================
+
+A = local_function(1)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_match
+    (variable)
+    (expr_function_call
+      (computed_function_name
+        (atom))
+      (integer))))
+
+================================================================================
+nested local function calls
+================================================================================
+
+A = local_op(1, local_function(1))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_match
+    (variable)
+    (expr_function_call
+      (computed_function_name
+        (atom))
+      (integer)
+      (expr_function_call
+        (computed_function_name
+          (atom))
+        (integer)))))
+
+================================================================================
+mixed function calls
+================================================================================
+
+module:function(Lambda(1, 'local$function'(1,2,3)))
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_function_call
+    (qualified_function_name
+      (atom)
+      (atom))
+    (expr_function_call
+      (computed_function_name
+        (variable))
+      (integer)
+      (expr_function_call
+        (computed_function_name
+          (atom))
+        (integer)
+        (integer)
+        (integer)))))

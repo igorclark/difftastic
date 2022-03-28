@@ -1,0 +1,261 @@
+================================================================================
+unary ops
+================================================================================
+
++A
+-A
+bnot A
+not A
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (expr_op
+      (variable)
+      (variable)))
+  (expr_op
+    (variable))
+  (expr_op
+    (variable)))
+
+================================================================================
+op left associativity
+================================================================================
+
+A * 1 * none
+A / 1 / none
+A and 1 and none
+A band 1 band none
+A div 1 div none
+A rem 1 rem none
+A + 1 + none
+A - 1 - none
+A bor 1 bor none
+A bsl 1 bsl none
+A bsr 1 bsr none
+A bxor 1 bxor none
+A or 1 or none
+A xor 1 xor none
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom))
+  (expr_op
+    (expr_op
+      (variable)
+      (integer))
+    (atom)))
+
+================================================================================
+op right associativity
+================================================================================
+
+A ++ B ++ C
+A -- B -- C
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (variable)
+    (expr_op
+      (variable)
+      (variable)))
+  (expr_op
+    (variable)
+    (expr_op
+      (variable)
+      (variable))))
+
+================================================================================
+op precedence: + -
+================================================================================
+
+1 - - - 2
+1 + - + 2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (integer)
+    (expr_op
+      (expr_op
+        (integer))))
+  (expr_op
+    (integer)
+    (expr_op
+      (expr_op
+        (integer)))))
+
+================================================================================
+binary ops
+================================================================================
+
+A - B
+A + B
+
+A * B
+A ++ B
+A -- B
+A / B
+A /= B
+A < B
+A =/= B
+A =:= B
+A =< B
+A == B
+A > B
+A >= B
+A and B
+A band B
+A bor B
+A bsl B
+A bsr B
+A bxor B
+A div B
+A or B
+A rem B
+A xor B
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable))
+  (expr_op
+    (variable)
+    (variable)))

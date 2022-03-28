@@ -1,0 +1,107 @@
+================================================================================
+receive anything
+================================================================================
+
+receive _ -> ok end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_receive
+    (case_clause
+      (pattern
+        (variable))
+      (atom))))
+
+================================================================================
+receive with branches
+================================================================================
+
+receive
+  true -> false;
+  false -> true
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_receive
+    (case_clause
+      (pattern
+        (atom))
+      (atom))
+    (case_clause
+      (pattern
+        (atom))
+      (atom))))
+
+================================================================================
+receive with branches with guards
+================================================================================
+
+receive
+  A when is_good(A) -> false;
+  false -> true
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_receive
+    (case_clause
+      (pattern
+        (variable))
+      (guard_clause
+        (guard_seq
+          (guard
+            (expr_function_call
+              (computed_function_name
+                (atom))
+              (variable)))))
+      (atom))
+    (case_clause
+      (pattern
+        (atom))
+      (atom))))
+
+================================================================================
+receive with timeout
+================================================================================
+
+receive
+  _ -> ok
+after
+  infinity -> not_ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_receive
+    (case_clause
+      (pattern
+        (variable))
+      (atom))
+    (expr_receive_after
+      (case_clause
+        (pattern
+          (atom))
+        (atom)))))
+
+================================================================================
+receive without branches
+================================================================================
+
+receive after
+  infinity -> not_ok
+end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expr_receive
+    (expr_receive_after
+      (case_clause
+        (pattern
+          (atom))
+        (atom)))))
